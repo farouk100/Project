@@ -129,6 +129,7 @@ void Search1()
 	} while (x[0] == 'y' || x[0] == 'Y');
 
 }
+// i wil delete the void delete
 
 
 void Delete1()
