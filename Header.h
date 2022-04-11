@@ -190,7 +190,7 @@ void Delete()
 		else {
 			cout << "The product is deleted successfuly\n";
 		}
-		cout << "DO You want to remove another one\n";
+		cout << "DO You want to remove another one (y / Y)\n";
 		cin.getline(x, 2);
 		my_file.close();
 		temporary_file.close();

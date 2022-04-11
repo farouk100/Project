@@ -34,15 +34,14 @@ int main()
 		case 4:
 		    Delete();
 		    break;
-		/*
+		
 		case 5:
-				cout << "5\n";break;
+				Update();break;
 		case 6:
 			cout << "thank you\n";//flag = false; 
 			break;
 		default:
 			cout << "\ainvalid\n";break;
-		*/
 		}
 	} while (/*flag*/ choice != 6);
 	return 0;

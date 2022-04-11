@@ -129,8 +129,6 @@ void Search1()
 	} while (x[0] == 'y' || x[0] == 'Y');
 
 }
-// i wil delete the void delete
-
 
 void Delete1()
 {
@@ -200,7 +198,121 @@ void Delete1()
 	} while (x[0] == 'y' || x[0] == 'Y');
 }
 
+void Update() {
+	fstream my_file, temporary_file;
+	//my_file.open("Super Market.txt", ios::in);
+	char id[10], id_r[10]; // but in act 9 spaces only because null chatacter or it will enter infinite loop
+	char name[100], name_r[100]; // 99 spaces
+	char cost[10];
+	char quentity[10];
+	char op[2], x[2] , update[2];
+	bool found;
+	do {
+		found = 0;
+		my_file.open("Super Market.txt", ios::in);
+		temporary_file.open("temp.txt", ios::app);
+		cout << "***************************\n";
+		cout << "To Search by id    enter: 1\n";
+		cout << "To Search by name  enter: 2\n";
+		bool flag1 = 0;
+		do {
+			cout << "Enter option: "; cin.getline(op, 2);
+			if (op[0] == '1' || op[0] == '2')
+			{
+				flag1 = 1;
+			}
+			else {
+				cout << "\a Please Enter 1 or 2 only \n";
+			}
+		} while (flag1 == 0);
+		switch (op[0])
+		{
+		case '1':
+			cout << "Enter id --> "; cin.getline(id_r, 10);
+			break;
+		case '2':
+			cout << "enter name --> "; cin.getline(name_r, 100);
+			break;
+		}
+		while (!my_file.eof())
+		{
+			my_file.getline(id, 10, '|');
+			my_file.getline(name, 100, '|');
+			my_file.getline(cost, 10, '|');
+			my_file.getline(quentity, 10);
+			// to avoid the emplty line;
+			if (int(id[0]) == 0) {
+				continue;
+			}
+			if (strcmp(id, id_r) == 0 && op[0] == '1' || strcmp(name, name_r) == 0 && op[0] == '2') {
+				found = 1;
+				cout << "To update the id -- > enter 1\n";
+				cout << "To update the name -- > enter 2\n";
+				cout << "To update the cost -- > enter 3\n";
+				cout << "To update the quentity -- > enter 4\n";
+				cout << "To update the whole data -- > enter 5\n";
+				cin.getline(update, 2);
+				switch (update[0])
+				{
+				case '1':
+					cout << "Enter new id\n";
+					cin.getline(id, 10);
+					temporary_file << id << "|" << name << "|" << cost << "|" << quentity << "\n";
+					cout << "the product is upadted successfully\n";
+					break;
+				case '2':
+					cout << "Enter new name\n";
+					cin.getline(name, 100);
+					temporary_file << id << "|" << name << "|" << cost << "|" << quentity << "\n";
+					cout << "the product is upadted successfully\n";
+					break;
+				case '3':
+					cout << "Enter new cost\n";
+					cin.getline(cost, 10);
+					temporary_file << id << "|" << name << "|" << cost << "|" << quentity << "\n";
+					
+					cout << "the product is upadted successfully\n"; 
+					break;
+				case '4':
+					cout << "Enter new quentity\n";
+					cin.getline(quentity, 10);
+					temporary_file << id << "|" << name << "|" << cost << "|" << quentity << "\n";
+					cout << "the product is upadted successfully\n";
+					break;
+				case '6':
+					cout << "Enter new id\n";
+					cin.getline(id, 10);
+					cout << "Enter new name\n";
+					cin.getline(name, 100);
+					cout << "Enter new cost\n";
+					cin.getline(cost, 10);
+					cout << "Enter new quentity\n";
+					cin.getline(quentity, 10);
+					temporary_file << id << "|" << name << "|" << cost << "|" << quentity << "\n";
+					
+					cout << "the product is upadted successfully\n"; break;
 
+				default:
+					cout << "invalid!\n";
+					break;
+				}
+			}
+			else {
+				temporary_file << id << "|" << name << "|" << cost << "|" << quentity << "\n";
+			}
+		}
+		if (found == 0) {
+			cout << "Product not found\n";
+		}
+		cout << "DO You want to update another one\n";
+		cin.getline(x, 2);
+		my_file.close();
+		temporary_file.close();
+		remove("Super Market.txt");
+		rename("temp.txt", "Super Market.txt");
+	} while (x[0] == 'y' || x[0] == 'Y');
+
+}
 /*
 ofstream --> write only --> out --> add but deleate all the previous
 ifstream --> read only --> in --> the file should be created before
